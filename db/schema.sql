@@ -1,0 +1,7 @@
+-- DROP DATABASE IF EXISTS museum_db;
+
+-- CREATE DATABASE museum_db;
+
+DROP DATABASE IF EXISTS blogs_db;
+
+CREATE DATABASE blogs_db;

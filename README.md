@@ -1,2 +1,0 @@
-# blog-site
-Blog Website

@@ -1,8 +1,70 @@
 const router = require('express').Router();
 const { log } = require('handlebars');
-const { User } = require('../../models');
+// const { User } = require('../../models');
+const { Blog, User } = require('../../models');
 
-// CREATE new user
+
+
+
+// GET USER DASHBOARD
+router.get('/', async (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/login');
+  } else {
+  // console.log('user-routes Dashboard Route Hit');
+  console.log(req.session.user.id);
+  console.log(req.session.user);
+  userID= req.session.user.id
+
+  try {
+    const dbUserData = await User.findByPk(userID, {      // GETS USER DATA
+      include: [
+        {
+          model: Blog,                // GETS THE BLOGS ASSOCIATED WITH THE USER AND INCLUDES THEM
+          attributes: [
+            'id',
+            'post_title',
+            'post_date'
+          ],
+        },
+      ],
+    })
+
+    const user = dbUserData.get({ plain: true });
+    console.log(dbUserData);
+    res.render('dashboard', {user,
+      loggedIn: req.session.loggedIn,
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+}});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CREATE NEW USER                                   
 router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
@@ -13,6 +75,7 @@ router.post('/', async (req, res) => {
 
     req.session.save(() => {
       req.session.loggedIn = true;
+      req.session.user = dbUserData       // saves user data to req.session.user to be used later
 
       res.status(200).json(dbUserData);
     });
@@ -21,47 +84,6 @@ router.post('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
-
-
-// GET USER
-router.get('/', async (req, res) => {
-  console.log('user-routes Dashboard Route Hit');
-  console.log(req.session.user.id);
-  try {
-    const dbUserData = await User.findAll({
-      // include: [
-      //   {
-      //     model: Painting,
-      //     attributes: ['filename', 'description'],
-      //   },
-      // ],
-    });
-
-    const user = dbUserData.map((user) =>
-      user.get({ plain: true })
-    );
-
-    res.render('dashboard', {user: req.session.user,
-      loggedIn: req.session.loggedIn,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Login
@@ -92,7 +114,8 @@ router.post('/login', async (req, res) => {
     
     req.session.save(() => {
       req.session.loggedIn = true;
-      req.session.user = dbUserData
+      req.session.user = dbUserData       // saves user data to req.session.user to be used later
+
 
       res
         .status(200)

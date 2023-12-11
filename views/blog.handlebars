@@ -1,10 +1,12 @@
 <section class="blog">
   {{!-- <img src="/images/{{painting.filename}}" alt="{{painting.description}}"> --}}
   <div class="blog-details">
-    <h2>{{blog.post_title}}</h2>
-    <p>{{blog.contents}}</p>
+    <h2>Post Title: {{blog.post_title}}</h2>
+    <p>Blog Contents: {{blog.contents}}</p>
+    <p>Creator Name: {{blog.user.username}}</p>
     <p>Created on: {{format_date blog.post_date}}</p>
 
-    Add comment section
-  </div>
+   NEED TO ADD COMMENTING
+
+
 </section>

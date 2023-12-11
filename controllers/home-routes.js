@@ -1,17 +1,17 @@
 const router = require('express').Router();
-const { log } = require('handlebars');
-const { Blog, Gallery, Painting, User } = require('../models');
+// const { log } = require('handlebars');
+const { Blog, User } = require('../models');
 
 // GET all Blog posts
 router.get('/', async (req, res) => {
   try {
     const dbBlogData = await Blog.findAll({
-      // include: [
-      //   {
-      //     model: Painting,
-      //     attributes: ['filename', 'description'],
-      //   },
-      // ],
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'username'],
+        },
+      ],
     });
 
     const blogs = dbBlogData.map((blog) =>
@@ -38,20 +38,17 @@ router.get('/blog/:id', async (req, res) => {
     // If the user is logged in, allow them to view the gallery
     try {
       const dbBlogData = await Blog.findByPk(req.params.id, {
-        // include: [
-        //   {
-        //     model: Painting,
-        //     attributes: [
-        //       'id',
-        //       'title',
-        //       'artist',
-        //       'exhibition_date',
-        //       'filename',
-        //       'description',
-        //     ],
-        //   },
-        // ],
+        include: [
+          {
+            model: User,
+            attributes: [
+              'id',
+              'username',
+            ],
+          },
+        ],
       });
+      console.log(dbBlogData);
       const blog = dbBlogData.get({ plain: true });
       res.render('blog', { blog, loggedIn: req.session.loggedIn });
     } catch (err) {
@@ -61,38 +58,6 @@ router.get('/blog/:id', async (req, res) => {
   }
 });
 
-
-
-
-
-
-// // GET USER
-// router.get('/users', async (req, res) => {
-//   console.log('Dashboard Route Hit');
-//   try {
-//     const user = await User.findAll({
-//       // include: [
-//       //   {
-//       //     model: Painting,
-//       //     attributes: ['filename', 'description'],
-//       //   },
-//       // ],
-//     });
-
-//     // const user = dbBlogData.map((blog) =>
-//     //   blog.get({ plain: true })
-//     // );
-
-//     res.render('dashboard', {
-//       user,
-//       loggedIn: req.session.loggedIn,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-
-// });
 
 
 

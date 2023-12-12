@@ -1,6 +1,6 @@
 const router = require('express').Router();
-// const { log } = require('handlebars');
-const { Blog, User } = require('../models');
+
+const { Blog, User, Comment } = require('../models');
 
 // GET all Blog posts
 router.get('/', async (req, res) => {
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
 });
 
-// GET One post
+// GET One Blog Post
 router.get('/blog/:id', async (req, res) => {
   // If the user is not logged in, redirect the user to the login page
   if (!req.session.loggedIn) {
@@ -46,6 +46,15 @@ router.get('/blog/:id', async (req, res) => {
               'username',
             ],
           },
+          {
+               model: Comment,
+               attributes: [
+                 'contents',
+                 'post_date',
+                 'user_id',
+                 'blog_id',
+               ],
+             },
         ],
       });
       console.log(dbBlogData);
@@ -58,52 +67,6 @@ router.get('/blog/:id', async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // GET one painting
-// router.get('/painting/:id', async (req, res) => {
-//   // If the user is not logged in, redirect the user to the login page
-//   if (!req.session.loggedIn) {
-//     res.redirect('/login');
-//   } else {
-//     // If the user is logged in, allow them to view the painting
-//     try {
-//       const dbPaintingData = await Painting.findByPk(req.params.id);
-
-//       const painting = dbPaintingData.get({ plain: true });
-
-//       res.render('painting', { painting, loggedIn: req.session.loggedIn });
-//     } catch (err) {
-//       console.log(err);
-//       res.status(500).json(err);
-//     }
-//   }
-// });
-
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
@@ -114,3 +77,13 @@ router.get('/login', (req, res) => {
 });
 
 module.exports = router;
+
+       // {
+          //   model: Comments,
+          //   attributes: [
+          //     'contents',
+          //     'post_date',
+          //     'user_id',
+          //     'blog_id',
+          //   ],
+          // },

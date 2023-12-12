@@ -6,21 +6,10 @@
     <p>Email: {{user.email}}</p> 
     <p>ADD ALL BLOGS CREATED BY USER: DONE </p>
     <P>ADD ABILITY TO CREATE A NEW BLOG POST</P>
+<br>
+<br>
 
-<div class="form-group">                                                                 
-        <label for="password-login">Title:</label>
-        <input class="form-input" type="Title" id="blogTitleForm" />
-      </div>
-      <label for="blogContent">Content</label>
-      <textarea id="blogContentForm" name="Blog Content" rows="4" cols="50"></textarea>
-      <br>
-       <button class="createBlogPostButton" type="submit">Create New Blog Post</button>
-</div>
-  </div>
-
-
-
-
+{{> create-blog}}
 
 <div id="dashboardBlogBlock">
 <h2>Your Blogs:</h2>
@@ -28,7 +17,7 @@
 {{> blog-details}}
 {{/each}}
 </div>
-
-
-
 </section>
+
+
+

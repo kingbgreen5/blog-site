@@ -1,0 +1,43 @@
+<div class="form-group">                                                                 
+      <label for="title">Title:</label>
+      <input class="form-input" type="Title" id="blogTitleForm" />
+      </div>
+      <label for="blogContent">Content</label>
+      <textarea id="blogContentForm" name="Blog Content" rows="4" cols="50"></textarea>
+      <br>
+       <button class="createBlogPostButton" id="createBlogPostButton" type="submit">Create New Blog Post</button>
+</div>
+  </div>
+
+
+{{!-- Script --}}
+<script>
+const newBlogFormHandler = async (event) => {
+  console.log('newblog button hit');
+    event.preventDefault();
+
+    const title = document.querySelector('#blogTitleForm').value.trim();
+    const content = document.querySelector('#blogContentForm').value.trim();
+    const postDate = new Date();
+    const userId =  {{user.id}}
+
+    if (title && content) {
+      const response = await fetch('/api/blog', {
+        method: 'POST',
+        body: JSON.stringify({ title, content, postDate, userId}),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        document.location.replace('/api/users');
+       
+      } else {
+        alert('Blog create failed');
+      
+      }
+    }
+  };
+  document
+    .querySelector('.createBlogPostButton')
+    .addEventListener('click', newBlogFormHandler);
+</script>

@@ -6,7 +6,13 @@
     <p>Creator Name: {{blog.user.username}}</p>
     <p>Created on: {{format_date blog.post_date}}</p>
 
-   NEED TO ADD COMMENTING
+<h3>Comments</h3>
+<br>
+<label for="blogContent"></label>
+      <textarea id="blogContentForm" name="Blog Content" rows="4" cols="50" placeholder="Add Comment"></textarea>
+       <button class="createCommentBtn" id="createCommentBtn" type="submit">Submit</button>
 
-
+{{#each blog.comments as |comment|}}
+{{> comment-details}}
+{{/each}}
 </section>

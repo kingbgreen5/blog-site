@@ -1,23 +1,23 @@
 const router = require('express').Router();
 const { log } = require('handlebars');
-// const { User } = require('../../models');
+
 const { Blog, User } = require('../../models');
 
 
 
 
-// GET USER DASHBOARD
+//                                                          GET USER DASHBOARD
 router.get('/', async (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('/login');
   } else {
   // console.log('user-routes Dashboard Route Hit');
-  console.log(req.session.user.id);
-  console.log(req.session.user);
+  // console.log(req.session.user.id);
+  // console.log(req.session.user);
   userID= req.session.user.id
 
   try {
-    const dbUserData = await User.findByPk(userID, {      // GETS USER DATA
+    const dbUserData = await User.findByPk(userID, {         // GETS USER DATA
       include: [
         {
           model: Blog,                // GETS THE BLOGS ASSOCIATED WITH THE USER AND INCLUDES THEM
@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
     })
 
     const user = dbUserData.get({ plain: true });
-    console.log(dbUserData);
+    // console.log(dbUserData);
     res.render('dashboard', {user,
       loggedIn: req.session.loggedIn,
     });
@@ -44,27 +44,7 @@ router.get('/', async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// CREATE NEW USER                                   
+//                                                CREATE NEW USER                                   
 router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({

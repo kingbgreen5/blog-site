@@ -47,14 +47,20 @@ router.get('/blog/:id', async (req, res) => {
             ],
           },
           {
-               model: Comment,
-               attributes: [
-                 'contents',
-                 'post_date',
-                 'user_id',
-                 'blog_id',
-               ],
-             },
+            model: Comment,
+            attributes: [
+              'contents',
+              'post_date',
+              'user_id',
+              'blog_id',
+            ],
+            include: [
+              {
+                model: User,
+                attributes: ['username'],
+              },
+            ],
+          },
         ],
       });
       console.log(dbBlogData);

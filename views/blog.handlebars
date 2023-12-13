@@ -6,13 +6,19 @@
     <p>Creator Name: {{blog.user.username}}</p>
     <p>Created on: {{format_date blog.post_date}}</p>
 
-<h3>Comments</h3>
+{{!-- <h3>Comments</h3>
 <br>
 <label for="blogContent"></label>
       <textarea id="blogContentForm" name="Blog Content" rows="4" cols="50" placeholder="Add Comment"></textarea>
-       <button class="createCommentBtn" id="createCommentBtn" type="submit">Submit</button>
+       <button class="createCommentBtn" id="createCommentBtn" type="submit">Submit</button> --}}
+
+{{> create-comment}}
 
 {{#each blog.comments as |comment|}}
 {{> comment-details}}
 {{/each}}
 </section>
+
+
+
+{{ }}

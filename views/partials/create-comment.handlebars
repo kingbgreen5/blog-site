@@ -1,0 +1,43 @@
+<h3>Comments Partial</h3>
+<br>
+<label for="commentContentForm"></label>
+      <textarea id="commentContentForm" name="Blog Content" rows="4" cols="50" placeholder="Add Comment"></textarea>
+       <button class="createCommentBtn" id="createCommentBtn" type="submit">Submit</button>
+
+
+
+{{!-- Script --}}
+<script>
+const newCommentFormHandler = async (event) => {
+  console.log('new Comment button hit');
+
+    event.preventDefault();
+
+   
+    const content = document.querySelector('#commentContentForm').value.trim();
+    const postDate = new Date();
+    const userId =  {{blog.user.id}};
+    const blogId =  {{blog.id}};
+
+    if (content) {
+      const response = await fetch('/api/comment', {
+        method: 'POST',
+        body: JSON.stringify({ content, postDate, userId, blogId}),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        document.location.replace('/blog/{{blog.id}}');
+       
+      } else {
+        alert('Blog create failed');
+      
+      }
+    }
+  };
+
+  document
+    .querySelector('.createCommentBtn')
+    .addEventListener('click', newCommentFormHandler);
+</script>
+

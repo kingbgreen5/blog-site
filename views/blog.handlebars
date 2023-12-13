@@ -1,16 +1,16 @@
 <section class="blog">
-  {{!-- <img src="/images/{{painting.filename}}" alt="{{painting.description}}"> --}}
+
   <div class="blog-details">
     <h2>Post Title: {{blog.post_title}}</h2>
     <p>Blog Contents: {{blog.contents}}</p>
     <p>Creator Name: {{blog.user.username}}</p>
     <p>Created on: {{format_date blog.post_date}}</p>
 
-{{!-- <h3>Comments</h3>
-<br>
-<label for="blogContent"></label>
-      <textarea id="blogContentForm" name="Blog Content" rows="4" cols="50" placeholder="Add Comment"></textarea>
-       <button class="createCommentBtn" id="createCommentBtn" type="submit">Submit</button> --}}
+{{!-- Place an if block that only renders this if your id matches the blogs user id --}}
+
+
+
+
 
 {{> create-comment}}
 
@@ -21,4 +21,51 @@
 
 
 
-{{ }}
+{{blog.user.id}}
+<p>currentUserId {{currentUserId}}</p>
+
+
+ <button  id="deleteBtn">Delete Blog</button>
+<button id="editBtn">Edit</button>
+<br>
+<br>
+
+
+{{!-- DELETE BLOG --}}
+{{!-- Script --}}
+<script>
+
+const deleteBlogHandler = async (event) => {
+  console.log('delete button hit');
+    event.preventDefault();
+    if({{blog.user.id}}=={{currentUserId}}){
+  await fetch(`/api/blog/{{blog.id}}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+    });
+document.location.replace('/api/users');
+    }else{
+      alert("That is not your blog to delete")
+    }
+    
+};
+
+
+
+
+
+
+
+
+
+  document
+    .querySelector('#deleteBtn')
+    .addEventListener('click', deleteBlogHandler);
+
+</script>
+
+  {{!-- console.log({{blog.user.id}})
+  console.log('req.session.user.id')
+   console.log({{req.session.user.id}}) --}}

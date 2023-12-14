@@ -1,24 +1,29 @@
 <section class="blog">
-  {{!-- <img src="/images/{{painting.filename}}" alt="{{painting.description}}"> --}}
+
   <div class="blog-details">
     <h2>Post Title: {{blog.post_title}}</h2>
+    {{> delete}}
     <p>Blog Contents: {{blog.contents}}</p>
     <p>Creator Name: {{blog.user.username}}</p>
     <p>Created on: {{format_date blog.post_date}}</p>
 
-{{!-- <h3>Comments</h3>
+{{!-- Place an if block that only renders this if your id matches the blogs user id --}}
+
+
+{{> edit}}
 <br>
-<label for="blogContent"></label>
-      <textarea id="blogContentForm" name="Blog Content" rows="4" cols="50" placeholder="Add Comment"></textarea>
-       <button class="createCommentBtn" id="createCommentBtn" type="submit">Submit</button> --}}
-
+<br>
+<br>
 {{> create-comment}}
-
+<br>
+<br>
+<br>
+<br>
 {{#each blog.comments as |comment|}}
 {{> comment-details}}
 {{/each}}
+<br>
+<br>
+<br>
+<br>
 </section>
-
-
-
-{{ }}

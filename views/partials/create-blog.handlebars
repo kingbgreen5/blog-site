@@ -26,7 +26,7 @@ const newBlogFormHandler = async (event) => {
     const postDate = new Date();
     const userId =  {{user.id}}
 
-    if (title && content) {
+  if (title && content) {
       const response = await fetch('/api/blog', {
         method: 'POST',
         body: JSON.stringify({ title, content, postDate, userId}),
@@ -36,12 +36,13 @@ const newBlogFormHandler = async (event) => {
       if (response.ok) {
         document.location.replace('/api/users');
        
-      } else {
+    } else {
         alert('Blog create failed');
       
       }
     }
   };
+
   document
     .querySelector('.createBlogPostButton')
     .addEventListener('click', newBlogFormHandler);

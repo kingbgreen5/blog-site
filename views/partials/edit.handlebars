@@ -1,0 +1,42 @@
+<div class="form-group">    
+  <h3>Edit Post</h3>                                                             
+      <label for="title"></label>
+      <input placeholder="{{blog.post_title}}" class="form-input" type="Title:" id="blogTitleForm">
+      </div>
+      <label for="blogContent"></label>
+      <textarea placeholder="{{blog.contents}}" id="blogContentForm" name="Blog Content" rows="10" cols="200"></textarea>
+      <br>
+       <button class="submitEditBtn" id="submitEditBtn" type="submit">Edit Blog post</button>
+       {{blog.id}}
+</div>
+  </div>
+
+<script>
+const editBlogHandler = async (blogId) => {
+  event.preventDefault();
+  console.log('edit button hit');
+  console.log(blogId)
+
+  const title = document.querySelector('#blogTitleForm').value.trim();
+  const content = document.querySelector('#blogContentForm').value.trim()
+  const postDate = new Date()
+  const userId = {{blog.user.id}}
+
+  if (title && content) {
+    const response = await fetch(`/api/blog/{{blog.id}}`, {
+      method: 'PUT',
+      body: JSON.stringify({ title, content, postDate, userId }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      document.location.replace('/api/users');
+    } else {
+      alert('Blog update failed')
+    }
+  }
+};
+
+  document.querySelector('#submitEditBtn').addEventListener('click', editBlogHandler);
+
+</script>

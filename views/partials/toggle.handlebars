@@ -1,0 +1,39 @@
+
+<!-- Button to toggle text blocks -->
+<button onclick="toggleTextBlocks()">Toggle Text Blocks</button>
+
+<!-- Text blocks with Handlebars logic -->
+{{#if showTextBlock1}}
+  <p>Text Block 1</p>
+{{/if}}
+
+{{#if showTextBlock2}}
+  <p>Text Block 2</p>
+{{/if}}
+
+<script>
+  // Initial state
+  let showTextBlock1 = true;
+  let showTextBlock2 = true;
+
+  // Function to toggle text blocks
+  function toggleTextBlocks() {
+    showTextBlock1 = !showTextBlock1;
+    showTextBlock2 = !showTextBlock2;
+
+    // Re-render the template after toggling
+    renderTemplate();
+  }
+
+  // Function to render the Handlebars template
+  function renderTemplate() {
+    const template = Handlebars.compile(document.getElementById('template').innerHTML);
+    document.getElementById('output').innerHTML = template({ showTextBlock1, showTextBlock2 });
+  }
+
+  // Initial rendering
+  renderTemplate();
+</script>
+
+</body>
+</html>

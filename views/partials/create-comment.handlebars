@@ -1,7 +1,9 @@
 <h3>Comments</h3>
 <br>
 <label for="commentContentForm"></label>
-      <textarea id="commentContentForm" name="Blog Content" rows="4" cols="50" placeholder="Add Comment"></textarea>
+      <textarea id="commentContentForm" name="commentarea" rows="5" cols="50" placeholder="Add Comment"></textarea>
+      <br>
+      <br>
        <button class="createCommentBtn" id="createCommentBtn" type="submit">Submit</button>
 
 
@@ -30,7 +32,7 @@ const newCommentFormHandler = async (event) => {
         document.location.replace('/blog/{{blog.id}}');
        
       } else {
-        alert('Blog create failed');
+        alert('Comment create failed');
       }
     }
   };

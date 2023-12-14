@@ -1,0 +1,32 @@
+
+ <button  id="deleteBtn">Delete Blog</button>
+ 
+{{!-- <a href="/api/edit/{{blog.id}}" target="_blank">Edit</a> --}}
+<br>
+<br>
+
+
+{{!-- DELETE BLOG --}}
+
+<script>
+const deleteBlogHandler = async (event) => {
+  console.log('delete button hit');
+    event.preventDefault();
+    if({{blog.user.id}}=={{currentUserId}}){
+  await fetch(`/api/blog/{{blog.id}}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+    });
+document.location.replace('/api/users');
+    }else{
+      alert("That is not your blog to delete")
+    }
+};
+
+
+
+  document.querySelector('#deleteBtn').addEventListener('click', deleteBlogHandler);
+
+</script>

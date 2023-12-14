@@ -2,6 +2,7 @@
 
   <div class="blog-details">
     <h2>Post Title: {{blog.post_title}}</h2>
+    {{> delete}}
     <p>Blog Contents: {{blog.contents}}</p>
     <p>Creator Name: {{blog.user.username}}</p>
     <p>Created on: {{format_date blog.post_date}}</p>
@@ -9,63 +10,20 @@
 {{!-- Place an if block that only renders this if your id matches the blogs user id --}}
 
 
-
-
-
+{{> edit}}
+<br>
+<br>
+<br>
 {{> create-comment}}
-
+<br>
+<br>
+<br>
+<br>
 {{#each blog.comments as |comment|}}
 {{> comment-details}}
 {{/each}}
+<br>
+<br>
+<br>
+<br>
 </section>
-
-
-
-{{blog.user.id}}
-<p>currentUserId {{currentUserId}}</p>
-
-
- <button  id="deleteBtn">Delete Blog</button>
-<button id="editBtn">Edit</button>
-<br>
-<br>
-
-
-{{!-- DELETE BLOG --}}
-{{!-- Script --}}
-<script>
-
-const deleteBlogHandler = async (event) => {
-  console.log('delete button hit');
-    event.preventDefault();
-    if({{blog.user.id}}=={{currentUserId}}){
-  await fetch(`/api/blog/{{blog.id}}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-    });
-document.location.replace('/api/users');
-    }else{
-      alert("That is not your blog to delete")
-    }
-    
-};
-
-
-
-
-
-
-
-
-
-  document
-    .querySelector('#deleteBtn')
-    .addEventListener('click', deleteBlogHandler);
-
-</script>
-
-  {{!-- console.log({{blog.user.id}})
-  console.log('req.session.user.id')
-   console.log({{req.session.user.id}}) --}}

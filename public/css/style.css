@@ -1,157 +1,121 @@
-:root {
-  --primary: #315555;
-  --secondary: #869392;
-  --tertiary: #5e877f;
-  --quatrinary: #66645a;
-  --light: #e3e4e3;
-  --dark: #182c23;
-  --error: rgb(228, 46, 1);
-  --border-radius: 0.3rem;
-  margin-left: 10%;
-  margin-right: 10%;
-
+:root{
+    --darkest: #211e20;
+    --dark: #585874;
+    --mid: #737391;
+    /* --mid: #a0a08b; */
+    --light: #e9efec;
+    --text: #f2e9e4;
 }
 
-body {
-  font-family: Arial;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  justify-content: flex-start;
-  background-color: var(--quatrinary);
-}
+/* var(--darkest);
+var(--text); */
 
-a {
-  color: var(--dark);
-  text-decoration: none;
-}
 
-a:visited {
-  color: inherit;
+body{
+    background-color: var(--darkest);
+    color: var(--text);
+    text-align: center;
+    align-content: center;
+    font-family:monospace;
+    font-size: larger;
 }
-
-header {
-  padding: 40px;
-  text-align: center;
-  background: var(--primary);
-  color: var(--light);
-}
-
-main {
-  display: flex;
-  flex-wrap: wrap;
-  flex-grow: 1;
-}
-
-aside {
-  flex: 0;
-  background-color: var(--tertiary);
-  padding: 80px;
-  text-align: left;
-  color: var(--light);
+card{
+    background-color: aliceblue;
 }
 
 nav {
-  display: flex;
-  background-color: var(--secondary);
+  background-color: var(--dark);
+  padding: 10px;
+  text-align: center;
+  font-size: larger;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 nav a {
-  color: var(--light);
-  padding: 14px 20px;
+  color: white;
   text-decoration: none;
-  text-align: center;
+  padding: 10px;
+  margin: 0 10px;
+  font-weight: bold;
 }
 
 nav a:hover {
-  color: var(--secondary);
-  background-color: var(--dark);
+  color: var(--mid);
 }
 
-.gallery {
-  flex: 4;
-  background-color: #fff;
-  padding: 50px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-}
+.thumbnail{
+    color: white;
+    background-color: var(--mid);
+    padding: .2%;
+    max-width: 20%;
+    margin: 0 auto;
+    margin-top: 1%;
+    font-size: x-large;
+      }
+   
 
-.btn-no-style {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
+.thumbnail a {
+    color: white;
   text-decoration: none;
-  font-size: 100%;
-  transition: color 0.1s;
-  margin-left: 16px;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-.painting {
-  width: 50%;
-  background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 25px;
-}
-
-.painting-details {
-  text-align: center;
-  padding: 10px 20px;
+  /* padding: 10px; */
+  /* margin: 0 10px; */
   font-weight: bold;
+  font-size: x-large;
+}
+.thumbnail header{
+    background-color: var(--dark);
 }
 
-/* CARDS */
-.card {
-  margin: 20px;
-  flex: 0 1 300px;
-  border: 7px double var(--dark);
-  border-radius: 2px;
-  background-color: var(--light);
-  color: var(--dark);
+#blogTitleForm{
+    background-color: var(--text);
+    width: 50%;
+    padding-top: .5%;
+    padding-bottom: .5%;
+    margin: .5%
 }
 
-.login-card {
-  margin: 0 0 20px 0;
-  flex: 0 0 50%;
-  max-width: 50%;
-  padding: 5px;
-  border: 3px solid var(--dark);
-  border-radius: var(--border-radius);
-  border-style: double;
-  border-width: thick;
-  background-color: #577a7c;
-  color: var(--light);
+#blogContentForm{
+    background-color: var(--text);
+    color: var(--darkest);
+    width: 50%;
+    max-width: 50%;
 }
 
-.card header {
-  color: var(--light);
-  font-weight: bold;
-  text-transform: uppercase;
-  margin: 0;
-  background-color: var(--tertiary);
-  padding: 0.625rem;
-  border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
+#commentContentForm{
+    background-color: var(--text);
+    color: var(--darkest);
+    width: 40%;
+    max-width: 40%;
 }
 
-.card-body {
-  font-size: 1.4rem;
-  text-align: center;
-  font-weight: bold;
+.blog-details header{
+    background-color: var(--mid);
+    max-width: 70%;
+    margin: 0 auto;
+    margin-top: 5%;
+    font-size: xx-large;
 }
 
-
-/* LAYOUT */
-.container {
-  display: flex;
-  flex-flow: column wrap;
-  align-content: flex-start;
-  align-items: center;
+#blog-contents{
+    background-color: var(--mid);
+    max-width: 70%;
+    margin: 0 auto;
 }
+
+.button {
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: var(--mid);
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+
+/* Hover effect */
+.button:hover {
+    background-color: var(--dark);
+  }

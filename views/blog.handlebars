@@ -1,13 +1,17 @@
 <section class="blog">
 
   <div class="blog-details">
-    <h2>Post Title: {{blog.post_title}}</h2>
-    {{> delete}}
-    <p>Blog Contents: {{blog.contents}}</p>
-    <p>Creator Name: {{blog.user.username}}</p>
+    <header>{{blog.post_title}}</header>
+   <div id="blog-contents">
+    <p>Contents: {{blog.contents}}</p>
+    </div>
+    <p>Created By: {{blog.user.username}}</p>
     <p>Created on: {{format_date blog.post_date}}</p>
 
 {{!-- Place an if block that only renders this if your id matches the blogs user id --}}
+ {{> delete}}
+
+
 
 
 {{> edit}}
@@ -27,3 +31,4 @@
 <br>
 <br>
 </section>
+

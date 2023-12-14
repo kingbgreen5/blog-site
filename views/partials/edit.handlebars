@@ -6,13 +6,52 @@
       <label for="blogContent"></label>
       <textarea placeholder="{{blog.contents}}" id="blogContentForm" name="Blog Content" rows="10" cols="200"></textarea>
       <br>
-       <button class="submitEditBtn" id="submitEditBtn" type="submit">Edit Blog post</button>
-       {{blog.id}}
+       <button class="button" id="submitEditBtn" type="submit">Edit Blog post</button>
+       
 </div>
   </div>
-
+ 
 <script>
+
+
+
+
 const editBlogHandler = async (blogId) => {
+  if ({{blog.user.id}} == {{currentUserId}}) {
+    event.preventDefault();
+    console.log('edit button hit');
+    console.log(blogId);
+
+    const title = document.querySelector('#blogTitleForm').value.trim();
+    const content = document.querySelector('#blogContentForm').value.trim();
+    const postDate = new Date();
+    const userId = {{blog.user.id}};
+
+    if (title && content) {
+      const response = await fetch(`/api/blog/{{blog.id}}`, {
+        method: 'PUT',
+        body: JSON.stringify({ title, content, postDate, userId }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        document.location.replace('/api/users');
+      } else {
+        alert('Blog update failed');
+      }
+    }
+  } else {
+    alert('You can\'t edit blogs that aren\'t yours');
+  }
+};
+
+
+  document.querySelector('#submitEditBtn').addEventListener('click', editBlogHandler);
+
+</script>
+{{!-- 
+const editBlogHandler = async (blogId) => {
+    if ({{blog.user.id}} == {{currentUserId}}){
   event.preventDefault();
   console.log('edit button hit');
   console.log(blogId)
@@ -36,7 +75,6 @@ const editBlogHandler = async (blogId) => {
     }
   }
 };
+}else{alert('You cant edit Blogs that arent yours')};
 
-  document.querySelector('#submitEditBtn').addEventListener('click', editBlogHandler);
-
-</script>
+ --}}

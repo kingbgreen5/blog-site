@@ -7,9 +7,9 @@
       <input placeholder="Title" class="form-input" type="Title:" id="blogTitleForm">
       </div>
       <label for="blogContent"></label>
-      <textarea placeholder="..." id="blogContentForm" name="Blog Content" rows="4" cols="50"></textarea>
+      <textarea placeholder="..." id="blogContentForm" name="Blog Content" rows="10" cols="200"></textarea>
       <br>
-       <button class="createBlogPostButton" id="createBlogPostButton" type="submit">Create New Blog Post</button>
+       <button class="button" id="createBlogPostButton" type="submit">Create New Blog Post</button>
 </div>
   </div>
 
@@ -44,6 +44,6 @@ const newBlogFormHandler = async (event) => {
   };
 
   document
-    .querySelector('.createBlogPostButton')
+    .querySelector('#createBlogPostButton')
     .addEventListener('click', newBlogFormHandler);
 </script>

@@ -11,9 +11,7 @@ router.get('/', async (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('/login');
   } else {
-  // console.log('user-routes Dashboard Route Hit');
-  // console.log(req.session.user.id);
-  // console.log(req.session.user);
+
   userID= req.session.user.id
 
   try {
